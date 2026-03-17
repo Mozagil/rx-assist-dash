@@ -60,7 +60,7 @@ export default function AppSidebar() {
         )}
         {collapsed && (
           <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: 'hsl(var(--sidebar-primary))' }}>
-            <Activity className="h-5 w-5 text-white" />
+            <Stethoscope className="h-5 w-5 text-white" />
           </div>
         )}
       </div>
