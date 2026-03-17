@@ -18,18 +18,18 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { title: "Ana Sayfa", path: "/", icon: Home },
+  { title: "Ana Sayfa", path: "/", icon: LayoutDashboard },
   { title: "Yeni Danışan Ekle", path: "/yeni-danisan", icon: UserPlus },
   { title: "Danışan Listesi", path: "/danisan-listesi", icon: Users },
-  { title: "Kontrol Aramaları", path: "/kontrol-aramalari", icon: Phone },
-  { title: "Değerlendirme Aramaları", path: "/degerlendirme-aramalari", icon: Star },
+  { title: "Kontrol Aramaları", path: "/kontrol-aramalari", icon: PhoneCall },
+  { title: "Değerlendirme Aramaları", path: "/degerlendirme-aramalari", icon: ClipboardCheck },
   { title: "Protokollerim", path: "/protokollerim", icon: FileText },
   { title: "Hedeflerim", path: "/hedeflerim", icon: Target },
-  { title: "Bilgilendirme Mesajlarım", path: "/bilgilendirme-mesajlari", icon: MessageSquare },
-  { title: "Ürünler", path: "/urunler", icon: Package },
+  { title: "Bilgilendirme Mesajlarım", path: "/bilgilendirme-mesajlari", icon: Mail },
+  { title: "Ürünler", path: "/urunler", icon: Pill },
   { title: "Formüller", path: "/formuller", icon: FlaskConical },
-  { title: "Cari Hareketlerim", path: "/cari-hareketler", icon: Wallet },
-  { title: "Kullanıcılar", path: "/kullanicilar", icon: Shield },
+  { title: "Cari Hareketlerim", path: "/cari-hareketler", icon: Receipt },
+  { title: "Kullanıcılar", path: "/kullanicilar", icon: UserCog },
 ];
 
 export default function AppSidebar() {
