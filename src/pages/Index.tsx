@@ -19,7 +19,8 @@ const stats = [
     change: "+12 bu ay",
     icon: Users,
     color: "stat-card-blue",
-    iconBg: "bg-medical-blue-light text-medical-blue",
+    iconBg: "bg-medical-blue-light",
+    iconColor: "text-medical-blue",
     path: "/danisan-listesi",
   },
   {
@@ -28,7 +29,8 @@ const stats = [
     change: "Son 30 gün",
     icon: AlertTriangle,
     color: "stat-card-red",
-    iconBg: "bg-medical-red-light text-medical-red",
+    iconBg: "bg-medical-red-light",
+    iconColor: "text-medical-red",
     path: "/destegi-biten",
   },
   {
@@ -37,7 +39,8 @@ const stats = [
     change: "Bu hafta 12",
     icon: Phone,
     color: "stat-card-green",
-    iconBg: "bg-medical-green-light text-medical-green",
+    iconBg: "bg-medical-green-light",
+    iconColor: "text-medical-green",
     path: "/kontrol-aramalari",
   },
   {
@@ -46,7 +49,8 @@ const stats = [
     change: "Bu hafta 8",
     icon: Star,
     color: "stat-card-amber",
-    iconBg: "bg-medical-amber-light text-medical-amber",
+    iconBg: "bg-medical-amber-light",
+    iconColor: "text-medical-amber",
     path: "/degerlendirme-aramalari",
   },
   {
@@ -55,7 +59,8 @@ const stats = [
     change: "+8% geçen aya göre",
     icon: Wallet,
     color: "stat-card-purple",
-    iconBg: "bg-medical-purple-light text-medical-purple",
+    iconBg: "bg-medical-purple-light",
+    iconColor: "text-medical-purple",
     path: "/cari-hareketler",
   },
   {
@@ -64,7 +69,8 @@ const stats = [
     change: "Geçen aya göre",
     icon: TrendingUp,
     color: "stat-card-cyan",
-    iconBg: "bg-medical-cyan-light text-medical-cyan",
+    iconBg: "bg-medical-cyan-light",
+    iconColor: "text-medical-cyan",
     path: "#",
   },
   {
@@ -73,7 +79,8 @@ const stats = [
     change: "Yakında",
     icon: BarChart3,
     color: "stat-card-blue",
-    iconBg: "bg-medical-blue-light text-medical-blue",
+    iconBg: "bg-medical-blue-light",
+    iconColor: "text-medical-blue",
     path: "#",
   },
   {
@@ -82,7 +89,8 @@ const stats = [
     change: "Yakında",
     icon: Calendar,
     color: "stat-card-green",
-    iconBg: "bg-medical-green-light text-medical-green",
+    iconBg: "bg-medical-green-light",
+    iconColor: "text-medical-green",
     path: "#",
   },
 ];
@@ -110,7 +118,7 @@ export default function Dashboard() {
                 <p className="font-display text-2xl font-bold text-foreground">{stat.value}</p>
                 <p className="text-xs text-muted-foreground">{stat.change}</p>
               </div>
-              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.iconBg}`}>
+              <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${stat.iconBg} ${stat.iconColor}`}>
                 <stat.icon className="h-5 w-5" />
               </div>
             </div>

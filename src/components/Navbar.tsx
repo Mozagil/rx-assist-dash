@@ -2,7 +2,7 @@ import { Bell, Search, User } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-card/80 px-6 backdrop-blur-md">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-card px-6">
       <div className="flex items-center gap-4">
         <h2 className="font-display text-lg font-semibold text-foreground">Hoş Geldiniz</h2>
       </div>
