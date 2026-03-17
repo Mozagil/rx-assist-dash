@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  Home,
+  LayoutDashboard,
   UserPlus,
   Users,
-  Phone,
-  Star,
+  PhoneCall,
+  ClipboardCheck,
   FileText,
   Target,
-  MessageSquare,
-  Package,
+  Mail,
+  Pill,
   FlaskConical,
-  Wallet,
-  Shield,
+  Receipt,
+  UserCog,
   ChevronLeft,
-  Activity,
+  Stethoscope,
 } from "lucide-react";
 
 const menuItems = [

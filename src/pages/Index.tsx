@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import {
   Users,
-  AlertTriangle,
-  Phone,
-  Star,
-  Wallet,
-  BarChart3,
-  TrendingUp,
-  Calendar,
+  UserX,
+  PhoneCall,
+  ClipboardCheck,
+  Receipt,
+  HeartPulse,
+  Pill,
+  CalendarClock,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import PageHeader from "@/components/PageHeader";

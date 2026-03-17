@@ -126,19 +126,25 @@
     @apply w-full text-sm;
   }
   .medical-table thead {
-    background: hsl(var(--primary) / 0.06);
+    background: hsl(var(--primary) / 0.12);
   }
   .medical-table th {
-    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground;
+    @apply px-4 py-3.5 text-left text-xs font-bold uppercase tracking-wider;
+    color: hsl(var(--primary));
+    border-bottom: 2px solid hsl(var(--primary) / 0.2);
   }
   .medical-table td {
-    @apply px-4 py-3.5 border-b border-border;
+    @apply px-4 py-4 border-b border-border;
   }
   .medical-table tbody tr {
-    @apply transition-colors duration-150;
+    @apply transition-all duration-200 cursor-pointer;
+  }
+  .medical-table tbody tr:nth-child(even) {
+    background: hsl(var(--primary) / 0.03);
   }
   .medical-table tbody tr:hover {
-    background: hsl(var(--primary) / 0.04);
+    background: hsl(var(--primary) / 0.10);
+    box-shadow: inset 3px 0 0 0 hsl(var(--primary));
   }
 
   .page-header {
