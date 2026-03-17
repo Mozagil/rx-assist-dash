@@ -38,35 +38,36 @@ export default function AppSidebar() {
 
   return (
     <aside
-      className="fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-border bg-card transition-all duration-300"
+      className="fixed left-0 top-0 z-40 flex h-screen flex-col transition-all duration-300"
       style={{
         width: collapsed ? "var(--sidebar-width-collapsed)" : "var(--sidebar-width)",
+        background: `hsl(var(--sidebar-background))`,
         boxShadow: "var(--shadow-sidebar)",
       }}
     >
       {/* Logo */}
-      <div className="flex h-16 items-center justify-between border-b border-border px-4">
+      <div className="flex h-16 items-center justify-between px-4" style={{ borderBottom: '1px solid hsl(var(--sidebar-border))' }}>
         {!collapsed && (
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <Activity className="h-5 w-5 text-primary-foreground" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: 'hsl(var(--sidebar-primary))' }}>
+              <Activity className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-base font-bold text-foreground">EczaPanel</h1>
-              <p className="text-[10px] text-muted-foreground">Eczane Yönetim Sistemi</p>
+              <h1 className="font-display text-base font-bold text-white">EczaPanel</h1>
+              <p className="text-[10px]" style={{ color: 'hsl(var(--sidebar-foreground))' }}>Eczane Yönetim Sistemi</p>
             </div>
           </div>
         )}
         {collapsed && (
-          <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Activity className="h-5 w-5 text-primary-foreground" />
+          <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: 'hsl(var(--sidebar-primary))' }}>
+            <Activity className="h-5 w-5 text-white" />
           </div>
         )}
       </div>
 
       {/* Menu */}
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <div className="space-y-1">
+        <div className="space-y-0.5">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -85,10 +86,13 @@ export default function AppSidebar() {
       </nav>
 
       {/* Collapse toggle */}
-      <div className="border-t border-border p-3">
+      <div className="p-3" style={{ borderTop: '1px solid hsl(var(--sidebar-border))' }}>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="icon-btn w-full justify-center"
+          className="flex w-full items-center justify-center rounded-lg p-2 transition-colors duration-150"
+          style={{ color: 'hsl(var(--sidebar-foreground))' }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'hsl(var(--sidebar-accent))')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
         >
           <ChevronLeft
             className={`h-4 w-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`}

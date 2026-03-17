@@ -6,66 +6,67 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    --background: 214 32% 95%;
+    --foreground: 220 30% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card: 210 40% 99%;
+    --card-foreground: 220 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 210 40% 99%;
+    --popover-foreground: 220 30% 12%;
 
-    --primary: 210 70% 45%;
+    --primary: 215 80% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 45% 45%;
+    --secondary: 160 50% 42%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 15% 93%;
-    --muted-foreground: 215 12% 50%;
+    --muted: 214 25% 90%;
+    --muted-foreground: 215 15% 46%;
 
-    --accent: 210 25% 92%;
-    --accent-foreground: 215 25% 15%;
+    --accent: 214 30% 93%;
+    --accent-foreground: 220 30% 12%;
 
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 18% 90%;
-    --input: 210 18% 90%;
-    --ring: 210 70% 45%;
+    --border: 214 22% 88%;
+    --input: 214 22% 88%;
+    --ring: 215 80% 48%;
 
     --radius: 0.75rem;
 
-    /* Custom medical tokens */
-    --medical-blue: 210 70% 45%;
-    --medical-blue-light: 210 70% 96%;
-    --medical-green: 160 45% 45%;
-    --medical-green-light: 160 45% 94%;
+    /* Medical tokens */
+    --medical-blue: 215 80% 48%;
+    --medical-blue-light: 215 65% 93%;
+    --medical-green: 160 50% 42%;
+    --medical-green-light: 160 45% 92%;
     --medical-amber: 38 92% 50%;
-    --medical-amber-light: 38 92% 94%;
+    --medical-amber-light: 38 80% 92%;
     --medical-red: 0 72% 55%;
-    --medical-red-light: 0 72% 95%;
+    --medical-red-light: 0 60% 94%;
     --medical-purple: 265 55% 52%;
-    --medical-purple-light: 265 55% 95%;
+    --medical-purple-light: 265 45% 93%;
     --medical-cyan: 188 65% 42%;
-    --medical-cyan-light: 188 65% 94%;
+    --medical-cyan-light: 188 50% 92%;
 
-    --sidebar-width: 280px;
+    --sidebar-width: 272px;
     --sidebar-width-collapsed: 72px;
     --navbar-height: 64px;
 
-    --shadow-card: 0 1px 3px 0 hsl(210 18% 50% / 0.06), 0 1px 2px -1px hsl(210 18% 50% / 0.06);
-    --shadow-card-hover: 0 10px 25px -5px hsl(210 18% 50% / 0.1), 0 8px 10px -6px hsl(210 18% 50% / 0.06);
-    --shadow-sidebar: 2px 0 8px -2px hsl(210 18% 50% / 0.08);
+    --shadow-card: 0 1px 4px 0 hsl(215 40% 40% / 0.07), 0 1px 2px -1px hsl(215 40% 40% / 0.05);
+    --shadow-card-hover: 0 12px 28px -6px hsl(215 60% 40% / 0.14), 0 6px 10px -4px hsl(215 60% 40% / 0.06);
+    --shadow-sidebar: 2px 0 12px -2px hsl(220 40% 20% / 0.12);
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 215 20% 35%;
-    --sidebar-primary: 210 70% 45%;
+    /* Dark navy sidebar */
+    --sidebar-background: 220 35% 16%;
+    --sidebar-foreground: 214 25% 72%;
+    --sidebar-primary: 215 80% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 70% 96%;
-    --sidebar-accent-foreground: 210 70% 35%;
-    --sidebar-border: 210 18% 92%;
-    --sidebar-ring: 210 70% 45%;
+    --sidebar-accent: 220 30% 22%;
+    --sidebar-accent-foreground: 214 30% 90%;
+    --sidebar-border: 220 25% 22%;
+    --sidebar-ring: 215 80% 48%;
 
     --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
@@ -105,7 +106,7 @@
   }
   .stat-card::before {
     content: '';
-    @apply absolute top-0 left-0 w-1 h-full rounded-l-xl;
+    @apply absolute top-0 left-0 w-1.5 h-full rounded-l-xl;
   }
   .stat-card-blue::before { background: hsl(var(--medical-blue)); }
   .stat-card-green::before { background: hsl(var(--medical-green)); }
@@ -114,11 +115,18 @@
   .stat-card-purple::before { background: hsl(var(--medical-purple)); }
   .stat-card-cyan::before { background: hsl(var(--medical-cyan)); }
 
+  .stat-card-blue:hover { border-color: hsl(var(--medical-blue) / 0.35); }
+  .stat-card-green:hover { border-color: hsl(var(--medical-green) / 0.35); }
+  .stat-card-amber:hover { border-color: hsl(var(--medical-amber) / 0.35); }
+  .stat-card-red:hover { border-color: hsl(var(--medical-red) / 0.35); }
+  .stat-card-purple:hover { border-color: hsl(var(--medical-purple) / 0.35); }
+  .stat-card-cyan:hover { border-color: hsl(var(--medical-cyan) / 0.35); }
+
   .medical-table {
     @apply w-full text-sm;
   }
   .medical-table thead {
-    @apply bg-muted/50;
+    background: hsl(var(--primary) / 0.06);
   }
   .medical-table th {
     @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground;
@@ -130,7 +138,7 @@
     @apply transition-colors duration-150;
   }
   .medical-table tbody tr:hover {
-    @apply bg-accent/50;
+    background: hsl(var(--primary) / 0.04);
   }
 
   .page-header {
@@ -168,13 +176,13 @@
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200;
   }
   .btn-medical-primary {
-    @apply btn-medical bg-primary text-primary-foreground;
+    @apply btn-medical bg-primary text-primary-foreground shadow-sm;
   }
   .btn-medical-primary:hover {
     @apply opacity-90 shadow-md;
   }
   .btn-medical-secondary {
-    @apply btn-medical bg-secondary text-secondary-foreground;
+    @apply btn-medical bg-secondary text-secondary-foreground shadow-sm;
   }
   .btn-medical-secondary:hover {
     @apply opacity-90;
@@ -222,13 +230,13 @@
     color: hsl(var(--sidebar-accent-foreground));
   }
   .sidebar-link-active {
-    background: hsl(var(--sidebar-accent));
+    background: hsl(var(--sidebar-primary) / 0.15);
     color: hsl(var(--sidebar-primary));
     font-weight: 600;
   }
 
   .search-input {
-    @apply w-full rounded-lg border border-border bg-card px-4 py-2.5 text-sm transition-all duration-200 outline-none;
+    @apply w-full rounded-lg border border-border bg-background px-4 py-2 text-sm transition-all duration-200 outline-none;
   }
   .search-input:focus {
     @apply ring-2 ring-ring/20 border-primary;
