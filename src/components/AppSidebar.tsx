@@ -1,35 +1,35 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  Home,
+  LayoutDashboard,
   UserPlus,
   Users,
-  Phone,
-  Star,
+  PhoneCall,
+  ClipboardCheck,
   FileText,
   Target,
-  MessageSquare,
-  Package,
+  Mail,
+  Pill,
   FlaskConical,
-  Wallet,
-  Shield,
+  Receipt,
+  UserCog,
   ChevronLeft,
-  Activity,
+  Stethoscope,
 } from "lucide-react";
 
 const menuItems = [
-  { title: "Ana Sayfa", path: "/", icon: Home },
+  { title: "Ana Sayfa", path: "/", icon: LayoutDashboard },
   { title: "Yeni Danışan Ekle", path: "/yeni-danisan", icon: UserPlus },
   { title: "Danışan Listesi", path: "/danisan-listesi", icon: Users },
-  { title: "Kontrol Aramaları", path: "/kontrol-aramalari", icon: Phone },
-  { title: "Değerlendirme Aramaları", path: "/degerlendirme-aramalari", icon: Star },
+  { title: "Kontrol Aramaları", path: "/kontrol-aramalari", icon: PhoneCall },
+  { title: "Değerlendirme Aramaları", path: "/degerlendirme-aramalari", icon: ClipboardCheck },
   { title: "Protokollerim", path: "/protokollerim", icon: FileText },
   { title: "Hedeflerim", path: "/hedeflerim", icon: Target },
-  { title: "Bilgilendirme Mesajlarım", path: "/bilgilendirme-mesajlari", icon: MessageSquare },
-  { title: "Ürünler", path: "/urunler", icon: Package },
+  { title: "Bilgilendirme Mesajlarım", path: "/bilgilendirme-mesajlari", icon: Mail },
+  { title: "Ürünler", path: "/urunler", icon: Pill },
   { title: "Formüller", path: "/formuller", icon: FlaskConical },
-  { title: "Cari Hareketlerim", path: "/cari-hareketler", icon: Wallet },
-  { title: "Kullanıcılar", path: "/kullanicilar", icon: Shield },
+  { title: "Cari Hareketlerim", path: "/cari-hareketler", icon: Receipt },
+  { title: "Kullanıcılar", path: "/kullanicilar", icon: UserCog },
 ];
 
 export default function AppSidebar() {
@@ -50,7 +50,7 @@ export default function AppSidebar() {
         {!collapsed && (
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: 'hsl(var(--sidebar-primary))' }}>
-              <Activity className="h-5 w-5 text-white" />
+              <Stethoscope className="h-5 w-5 text-white" />
             </div>
             <div>
               <h1 className="font-display text-base font-bold text-white">EczaPanel</h1>
@@ -60,7 +60,7 @@ export default function AppSidebar() {
         )}
         {collapsed && (
           <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: 'hsl(var(--sidebar-primary))' }}>
-            <Activity className="h-5 w-5 text-white" />
+            <Stethoscope className="h-5 w-5 text-white" />
           </div>
         )}
       </div>
