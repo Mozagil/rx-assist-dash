@@ -1,16 +1,122 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useNavigate } from "react-router-dom";
+import {
+  Users,
+  AlertTriangle,
+  Phone,
+  Star,
+  Wallet,
+  BarChart3,
+  TrendingUp,
+  Calendar,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import PageHeader from "@/components/PageHeader";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const stats = [
+  {
+    title: "Toplam Üye",
+    value: "1.248",
+    change: "+12 bu ay",
+    icon: Users,
+    color: "stat-card-blue",
+    iconBg: "bg-medical-blue-light text-medical-blue",
+    path: "/danisan-listesi",
+  },
+  {
+    title: "Desteği Biten",
+    value: "34",
+    change: "Son 30 gün",
+    icon: AlertTriangle,
+    color: "stat-card-red",
+    iconBg: "bg-medical-red-light text-medical-red",
+    path: "/destegi-biten",
+  },
+  {
+    title: "Kontrol Aramaları",
+    value: "87",
+    change: "Bu hafta 12",
+    icon: Phone,
+    color: "stat-card-green",
+    iconBg: "bg-medical-green-light text-medical-green",
+    path: "/kontrol-aramalari",
+  },
+  {
+    title: "Değerlendirme Aramaları",
+    value: "56",
+    change: "Bu hafta 8",
+    icon: Star,
+    color: "stat-card-amber",
+    iconBg: "bg-medical-amber-light text-medical-amber",
+    path: "/degerlendirme-aramalari",
+  },
+  {
+    title: "Ciro",
+    value: "₺124.500",
+    change: "+8% geçen aya göre",
+    icon: Wallet,
+    color: "stat-card-purple",
+    iconBg: "bg-medical-purple-light text-medical-purple",
+    path: "/cari-hareketler",
+  },
+  {
+    title: "Aylık Büyüme",
+    value: "%15",
+    change: "Geçen aya göre",
+    icon: TrendingUp,
+    color: "stat-card-cyan",
+    iconBg: "bg-medical-cyan-light text-medical-cyan",
+    path: "#",
+  },
+  {
+    title: "Aktif Tedaviler",
+    value: "—",
+    change: "Yakında",
+    icon: BarChart3,
+    color: "stat-card-blue",
+    iconBg: "bg-medical-blue-light text-medical-blue",
+    path: "#",
+  },
+  {
+    title: "Randevular",
+    value: "—",
+    change: "Yakında",
+    icon: Calendar,
+    color: "stat-card-green",
+    iconBg: "bg-medical-green-light text-medical-green",
+    path: "#",
+  },
+];
+
+export default function Dashboard() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div>
+      <PageHeader title="Dashboard" subtitle="Eczane yönetim panelinize hoş geldiniz" />
+
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat, i) => (
+          <motion.div
+            key={stat.title}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.3 }}
+            className={`stat-card ${stat.color}`}
+            onClick={() => stat.path !== "#" && navigate(stat.path)}
+          >
+            <div className="flex items-start justify-between">
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
+                <p className="font-display text-2xl font-bold text-foreground">{stat.value}</p>
+                <p className="text-xs text-muted-foreground">{stat.change}</p>
+              </div>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.iconBg}`}>
+                <stat.icon className="h-5 w-5" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
-};
-
-const Index = PlaceholderIndex;
-
-export default Index;
+}
