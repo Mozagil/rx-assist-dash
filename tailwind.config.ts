@@ -74,6 +74,8 @@ export default {
           "purple-light": "hsl(var(--medical-purple-light))",
           cyan: "hsl(var(--medical-cyan))",
           "cyan-light": "hsl(var(--medical-cyan-light))",
+          teal: "hsl(var(--medical-teal))",
+          "teal-light": "hsl(var(--medical-teal-light))",
         },
       },
       borderRadius: {

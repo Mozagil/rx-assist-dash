@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Activity } from "lucide-react";
+import { Stethoscope } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,9 +10,9 @@ export default function Footer() {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Activity className="h-4 w-4 text-primary-foreground" />
+                <Stethoscope className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="font-display text-base font-bold text-foreground">EczaPanel</span>
+              <span className="font-display text-sm font-bold text-foreground">EczaPanel</span>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
               Modern eczane yönetim sistemi. Hasta takibi, formüller ve cari hareketlerinizi tek panelden yönetin.
@@ -52,7 +52,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-border px-6 py-4">
         <div className="flex flex-col items-center justify-between gap-2 text-xs text-muted-foreground sm:flex-row">
           <p>© 2026 EczaPanel — Eczane Yönetim Sistemi. Tüm hakları saklıdır.</p>
