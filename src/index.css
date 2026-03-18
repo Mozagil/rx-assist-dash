@@ -6,67 +6,70 @@
 
 @layer base {
   :root {
-    --background: 214 32% 95%;
-    --foreground: 220 30% 12%;
+    --background: 210 20% 96%;
+    --foreground: 220 25% 14%;
 
-    --card: 210 40% 99%;
-    --card-foreground: 220 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 14%;
 
-    --popover: 210 40% 99%;
-    --popover-foreground: 220 30% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 14%;
 
-    --primary: 215 80% 48%;
+    --primary: 199 70% 44%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 50% 42%;
+    --secondary: 160 45% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 214 25% 90%;
-    --muted-foreground: 215 15% 46%;
+    --muted: 210 18% 92%;
+    --muted-foreground: 215 12% 50%;
 
-    --accent: 214 30% 93%;
-    --accent-foreground: 220 30% 12%;
+    --accent: 210 22% 94%;
+    --accent-foreground: 220 25% 14%;
 
-    --destructive: 0 72% 55%;
+    --destructive: 0 68% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 22% 88%;
-    --input: 214 22% 88%;
-    --ring: 215 80% 48%;
+    --border: 210 16% 90%;
+    --input: 210 16% 90%;
+    --ring: 199 70% 44%;
 
-    --radius: 0.75rem;
+    --radius: 0.625rem;
 
     /* Medical tokens */
-    --medical-blue: 215 80% 48%;
-    --medical-blue-light: 215 65% 93%;
-    --medical-green: 160 50% 42%;
-    --medical-green-light: 160 45% 92%;
+    --medical-blue: 199 70% 44%;
+    --medical-blue-light: 199 55% 94%;
+    --medical-green: 160 45% 45%;
+    --medical-green-light: 160 40% 93%;
     --medical-amber: 38 92% 50%;
-    --medical-amber-light: 38 80% 92%;
-    --medical-red: 0 72% 55%;
-    --medical-red-light: 0 60% 94%;
-    --medical-purple: 265 55% 52%;
-    --medical-purple-light: 265 45% 93%;
-    --medical-cyan: 188 65% 42%;
-    --medical-cyan-light: 188 50% 92%;
+    --medical-amber-light: 38 70% 93%;
+    --medical-red: 0 68% 52%;
+    --medical-red-light: 0 55% 95%;
+    --medical-purple: 262 52% 50%;
+    --medical-purple-light: 262 40% 94%;
+    --medical-cyan: 185 60% 40%;
+    --medical-cyan-light: 185 45% 93%;
+    --medical-teal: 174 55% 42%;
+    --medical-teal-light: 174 40% 93%;
 
-    --sidebar-width: 272px;
+    --sidebar-width: 264px;
     --sidebar-width-collapsed: 72px;
     --navbar-height: 64px;
 
-    --shadow-card: 0 1px 4px 0 hsl(215 40% 40% / 0.07), 0 1px 2px -1px hsl(215 40% 40% / 0.05);
-    --shadow-card-hover: 0 12px 28px -6px hsl(215 60% 40% / 0.14), 0 6px 10px -4px hsl(215 60% 40% / 0.06);
-    --shadow-sidebar: 2px 0 12px -2px hsl(220 40% 20% / 0.12);
+    --shadow-xs: 0 1px 2px 0 hsl(220 20% 30% / 0.04);
+    --shadow-card: 0 1px 3px 0 hsl(220 20% 30% / 0.06), 0 1px 2px -1px hsl(220 20% 30% / 0.04);
+    --shadow-card-hover: 0 10px 25px -5px hsl(199 70% 44% / 0.1), 0 4px 8px -2px hsl(220 20% 30% / 0.05);
+    --shadow-sidebar: 1px 0 8px -2px hsl(220 30% 15% / 0.15);
 
-    /* Dark navy sidebar */
-    --sidebar-background: 220 35% 16%;
-    --sidebar-foreground: 214 25% 72%;
-    --sidebar-primary: 215 80% 60%;
+    /* Sidebar */
+    --sidebar-background: 222 32% 18%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-primary: 199 70% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 30% 22%;
-    --sidebar-accent-foreground: 214 30% 90%;
-    --sidebar-border: 220 25% 22%;
-    --sidebar-ring: 215 80% 48%;
+    --sidebar-accent: 222 28% 24%;
+    --sidebar-accent-foreground: 210 25% 88%;
+    --sidebar-border: 222 25% 24%;
+    --sidebar-ring: 199 70% 44%;
 
     --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
@@ -77,14 +80,12 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     @apply font-semibold tracking-tight;
@@ -92,21 +93,27 @@
 }
 
 @layer components {
+  /* ---- Cards ---- */
   .medical-card {
-    @apply bg-card rounded-xl border border-border p-6 transition-all duration-200;
+    @apply bg-card rounded-xl border border-border p-5 transition-all duration-200;
     box-shadow: var(--shadow-card);
   }
   .medical-card:hover {
     box-shadow: var(--shadow-card-hover);
-    @apply -translate-y-0.5;
   }
 
+  /* ---- KPI stat cards ---- */
   .stat-card {
-    @apply medical-card cursor-pointer relative overflow-hidden;
+    @apply bg-card rounded-xl border border-border p-5 cursor-pointer relative overflow-hidden transition-all duration-200;
+    box-shadow: var(--shadow-card);
+  }
+  .stat-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    @apply -translate-y-0.5;
   }
   .stat-card::before {
     content: '';
-    @apply absolute top-0 left-0 w-1.5 h-full rounded-l-xl;
+    @apply absolute top-0 left-0 w-1 h-full;
   }
   .stat-card-blue::before { background: hsl(var(--medical-blue)); }
   .stat-card-green::before { background: hsl(var(--medical-green)); }
@@ -114,50 +121,56 @@
   .stat-card-red::before { background: hsl(var(--medical-red)); }
   .stat-card-purple::before { background: hsl(var(--medical-purple)); }
   .stat-card-cyan::before { background: hsl(var(--medical-cyan)); }
+  .stat-card-teal::before { background: hsl(var(--medical-teal)); }
 
-  .stat-card-blue:hover { border-color: hsl(var(--medical-blue) / 0.35); }
-  .stat-card-green:hover { border-color: hsl(var(--medical-green) / 0.35); }
-  .stat-card-amber:hover { border-color: hsl(var(--medical-amber) / 0.35); }
-  .stat-card-red:hover { border-color: hsl(var(--medical-red) / 0.35); }
-  .stat-card-purple:hover { border-color: hsl(var(--medical-purple) / 0.35); }
-  .stat-card-cyan:hover { border-color: hsl(var(--medical-cyan) / 0.35); }
+  .stat-card-blue:hover { border-color: hsl(var(--medical-blue) / 0.3); }
+  .stat-card-green:hover { border-color: hsl(var(--medical-green) / 0.3); }
+  .stat-card-amber:hover { border-color: hsl(var(--medical-amber) / 0.3); }
+  .stat-card-red:hover { border-color: hsl(var(--medical-red) / 0.3); }
+  .stat-card-purple:hover { border-color: hsl(var(--medical-purple) / 0.3); }
+  .stat-card-cyan:hover { border-color: hsl(var(--medical-cyan) / 0.3); }
+  .stat-card-teal:hover { border-color: hsl(var(--medical-teal) / 0.3); }
 
+  /* ---- Tables ---- */
   .medical-table {
     @apply w-full text-sm;
   }
   .medical-table thead {
-    background: hsl(var(--primary) / 0.12);
+    background: hsl(var(--primary) / 0.06);
   }
   .medical-table th {
-    @apply px-4 py-3.5 text-left text-xs font-bold uppercase tracking-wider;
-    color: hsl(var(--primary));
-    border-bottom: 2px solid hsl(var(--primary) / 0.2);
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
+    color: hsl(var(--foreground));
+    border-bottom: 2px solid hsl(var(--primary) / 0.15);
   }
   .medical-table td {
-    @apply px-4 py-4 border-b border-border;
+    @apply px-4 py-3.5 border-b border-border text-sm;
+    color: hsl(var(--foreground));
   }
   .medical-table tbody tr {
-    @apply transition-all duration-200 cursor-pointer;
+    @apply transition-all duration-150;
   }
   .medical-table tbody tr:nth-child(even) {
-    background: hsl(var(--primary) / 0.03);
+    background: hsl(var(--primary) / 0.02);
   }
   .medical-table tbody tr:hover {
-    background: hsl(var(--primary) / 0.10);
+    background: hsl(var(--primary) / 0.07);
     box-shadow: inset 3px 0 0 0 hsl(var(--primary));
   }
 
+  /* ---- Page header ---- */
   .page-header {
-    @apply mb-8;
+    @apply mb-6;
   }
   .page-title {
-    @apply text-2xl font-bold text-foreground;
+    @apply text-xl font-bold text-foreground;
     font-family: var(--font-display);
   }
   .page-subtitle {
-    @apply text-sm text-muted-foreground mt-1;
+    @apply text-sm text-muted-foreground mt-0.5;
   }
 
+  /* ---- Badges ---- */
   .badge-status {
     @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
   }
@@ -178,6 +191,7 @@
     color: hsl(var(--medical-blue));
   }
 
+  /* ---- Buttons ---- */
   .btn-medical {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200;
   }
@@ -222,11 +236,11 @@
   .protocol-card {
     @apply medical-card;
   }
-
   .message-card {
     @apply medical-card;
   }
 
+  /* ---- Sidebar ---- */
   .sidebar-link {
     @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150;
     color: hsl(var(--sidebar-foreground));
@@ -240,7 +254,13 @@
     color: hsl(var(--sidebar-primary));
     font-weight: 600;
   }
+  .sidebar-link-active::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full;
+    background: hsl(var(--sidebar-primary));
+  }
 
+  /* ---- Search ---- */
   .search-input {
     @apply w-full rounded-lg border border-border bg-background px-4 py-2 text-sm transition-all duration-200 outline-none;
   }
@@ -249,5 +269,11 @@
   }
   .search-input::placeholder {
     @apply text-muted-foreground;
+  }
+
+  /* ---- Dashboard sections ---- */
+  .dashboard-section-title {
+    @apply text-base font-semibold text-foreground flex items-center gap-2;
+    font-family: var(--font-display);
   }
 }
