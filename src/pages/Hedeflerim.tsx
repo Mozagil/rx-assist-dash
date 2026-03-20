@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
 import DataTable from "@/components/DataTable";
 
@@ -25,6 +26,7 @@ const data = [
 export default function Hedeflerim() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Hedeflerim" subtitle="Tedavi hedeflerini takip edin" />
       <DataTable columns={columns} data={data} searchPlaceholder="Hedef ara..." />
     </div>

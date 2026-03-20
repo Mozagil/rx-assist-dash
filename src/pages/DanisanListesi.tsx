@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
 import DataTable from "@/components/DataTable";
 import { Eye, Edit, Trash2 } from "lucide-react";
@@ -28,6 +29,7 @@ const data = [
 export default function DanisanListesi() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Danışan Listesi" subtitle="Tüm kayıtlı danışanlarınızı görüntüleyin" />
       <DataTable columns={columns} data={data} searchPlaceholder="Danışan ara..." />
     </div>

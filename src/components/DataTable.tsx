@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Column {
   key: string;
@@ -10,9 +11,10 @@ interface DataTableProps {
   columns: Column[];
   data: any[];
   searchPlaceholder?: string;
+  rowClassName?: (row: any) => string | undefined;
 }
 
-export default function DataTable({ columns, data, searchPlaceholder = "Ara..." }: DataTableProps) {
+export default function DataTable({ columns, data, searchPlaceholder = "Ara...", rowClassName }: DataTableProps) {
   return (
     <div className="medical-card p-0 overflow-hidden">
       <div className="p-4 border-b border-border">
@@ -39,7 +41,7 @@ export default function DataTable({ columns, data, searchPlaceholder = "Ara..." 
               </tr>
             ) : (
               data.map((row, i) => (
-                <tr key={i}>
+                <tr key={i} className={cn(rowClassName?.(row))}>
                   {columns.map((col) => (
                     <td key={col.key}>
                       {col.render ? col.render(row[col.key], row) : row[col.key]}

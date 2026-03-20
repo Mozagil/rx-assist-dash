@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
 import DataTable from "@/components/DataTable";
 
@@ -25,6 +26,7 @@ const data = [
 export default function CariHareketler() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Cari Hareketlerim" subtitle="Gelir ve gider hareketlerinizi takip edin" />
       <DataTable columns={columns} data={data} searchPlaceholder="Hareket ara..." />
     </div>
