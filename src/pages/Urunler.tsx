@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
 
 export default function Urunler() {
