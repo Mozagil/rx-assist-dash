@@ -136,12 +136,12 @@
     @apply w-full text-sm;
   }
   .medical-table thead {
-    background: hsl(var(--primary) / 0.06);
+    background: hsl(var(--primary) / 0.15);
   }
   .medical-table th {
     @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
-    color: hsl(var(--foreground));
-    border-bottom: 2px solid hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+    border-bottom: 2px solid hsl(var(--primary) / 0.25);
   }
   .medical-table td {
     @apply px-4 py-3.5 border-b border-border text-sm;
