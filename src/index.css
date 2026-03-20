@@ -158,6 +158,20 @@
     box-shadow: inset 3px 0 0 0 hsl(var(--primary));
   }
 
+  /* Row status colors */
+  .row-status-green {
+    background: hsl(var(--medical-green-light)) !important;
+    border-left: 3px solid hsl(var(--medical-green));
+  }
+  .row-status-amber {
+    background: hsl(var(--medical-amber-light)) !important;
+    border-left: 3px solid hsl(var(--medical-amber));
+  }
+  .row-status-red {
+    background: hsl(var(--medical-red-light)) !important;
+    border-left: 3px solid hsl(var(--medical-red));
+  }
+
   /* ---- Page header ---- */
   .page-header {
     @apply mb-6;
