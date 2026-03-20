@@ -139,7 +139,7 @@
     background: hsl(var(--primary) / 0.15);
   }
   .medical-table th {
-    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider;
     color: hsl(var(--primary));
     border-bottom: 2px solid hsl(var(--primary) / 0.25);
   }
