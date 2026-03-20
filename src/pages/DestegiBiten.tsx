@@ -37,6 +37,7 @@ const data = [
 export default function DestegiBiten() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Desteği Biten" subtitle="Destek süresi sona eren veya yakında bitecek olan danışanlar" />
       <DataTable columns={columns} data={data} searchPlaceholder="Hasta ara..." />
     </div>

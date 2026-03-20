@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 export default function YeniDanisan() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Yeni Danışan Ekle" subtitle="Yeni bir danışan kaydı oluşturun" />
       <div className="medical-card max-w-2xl">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">

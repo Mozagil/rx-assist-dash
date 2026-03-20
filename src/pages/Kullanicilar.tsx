@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 export default function Kullanicilar() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Kullanıcılar" subtitle="Sistem kullanıcılarını yönetin" />
       <div className="medical-card flex items-center justify-center py-16 text-muted-foreground">
         Kullanıcı yönetimi yakında eklenecek

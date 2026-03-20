@@ -29,6 +29,7 @@ const data = [
 export default function DanisanListesi() {
   return (
     <div>
+      <BackButton />
       <PageHeader title="Danışan Listesi" subtitle="Tüm kayıtlı danışanlarınızı görüntüleyin" />
       <DataTable columns={columns} data={data} searchPlaceholder="Danışan ara..." />
     </div>
