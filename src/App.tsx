@@ -20,6 +20,10 @@ import Urunler from "./pages/Urunler";
 import Formuller from "./pages/Formuller";
 import CariHareketler from "./pages/CariHareketler";
 import Kullanicilar from "./pages/Kullanicilar";
+import DanisanProtokoller from "./pages/DanisanProtokoller";
+import DanisanBilgilendirme from "./pages/DanisanBilgilendirme";
+import KayitOzeti from "./pages/KayitOzeti";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,12 +35,16 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/auth" element={<Auth />} />
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/danisan-listesi" element={<DanisanListesi />} />
             <Route path="/danisan/:id" element={<DanisanProfili />} />
             <Route path="/danisan/:id/on-gorusme" element={<OnGorusme />} />
             <Route path="/danisan/:id/verilen-destek" element={<VerilenDestek />} />
+            <Route path="/danisan/:id/protokol" element={<DanisanProtokoller />} />
+            <Route path="/danisan/:id/bilgilendirme" element={<DanisanBilgilendirme />} />
+            <Route path="/danisan/:id/kayit-ozeti" element={<KayitOzeti />} />
             <Route path="/destegi-biten" element={<DestegiBiten />} />
             <Route path="/kontrol-aramalari" element={<KontrolAramalari />} />
             <Route path="/degerlendirme-aramalari" element={<DegerlendirmeAramalari />} />
