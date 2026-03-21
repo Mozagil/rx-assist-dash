@@ -6,6 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import AppLayout from "@/components/AppLayout";
 import Index from "./pages/Index";
 import DanisanListesi from "./pages/DanisanListesi";
+import DanisanProfili from "./pages/DanisanProfili";
+import OnGorusme from "./pages/OnGorusme";
+import VerilenDestek from "./pages/VerilenDestek";
 import DestegiBiten from "./pages/DestegiBiten";
 import KontrolAramalari from "./pages/KontrolAramalari";
 import DegerlendirmeAramalari from "./pages/DegerlendirmeAramalari";
@@ -31,6 +34,9 @@ const App = () => (
           <Route element={<AppLayout />}>
             <Route path="/" element={<Index />} />
             <Route path="/danisan-listesi" element={<DanisanListesi />} />
+            <Route path="/danisan/:id" element={<DanisanProfili />} />
+            <Route path="/danisan/:id/on-gorusme" element={<OnGorusme />} />
+            <Route path="/danisan/:id/verilen-destek" element={<VerilenDestek />} />
             <Route path="/destegi-biten" element={<DestegiBiten />} />
             <Route path="/kontrol-aramalari" element={<KontrolAramalari />} />
             <Route path="/degerlendirme-aramalari" element={<DegerlendirmeAramalari />} />
