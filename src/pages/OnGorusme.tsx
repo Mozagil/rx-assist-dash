@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
-import DetailModal from "@/components/DetailModal";
 import { Plus, SkipForward, Save, Eye } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { FileText } from "lucide-react";
 
 interface Interview {
   id: string;
@@ -68,9 +69,6 @@ export default function OnGorusme() {
     setErrors(prev => ({ ...prev, [key]: false }));
   };
 
-  const getSummary = (i: Interview) =>
-    fields.map(f => `${f.label}: ${(i as any)[f.key]}`).join("\n");
-
   return (
     <div>
       <BackButton />
@@ -93,12 +91,23 @@ export default function OnGorusme() {
                   <span className="w-2 h-2 rounded-full bg-[hsl(var(--primary))]" />
                   {f.label}
                 </label>
-                <button
-                  onClick={() => handleSkip(f.key)}
-                  className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
-                >
-                  <SkipForward className="h-3 w-3" /> Geç
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      setForm(prev => ({ ...prev, [f.key]: (prev[f.key] || "") }));
+                      setErrors(prev => ({ ...prev, [f.key]: false }));
+                    }}
+                    className="text-xs text-[hsl(var(--primary))] hover:text-[hsl(var(--primary)/0.8)] flex items-center gap-1 transition-colors font-medium"
+                  >
+                    <Plus className="h-3 w-3" /> Ekle
+                  </button>
+                  <button
+                    onClick={() => handleSkip(f.key)}
+                    className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+                  >
+                    <SkipForward className="h-3 w-3" /> Geç
+                  </button>
+                </div>
               </div>
               <textarea
                 value={form[f.key] || ""}
@@ -152,14 +161,32 @@ export default function OnGorusme() {
         ))}
       </div>
 
-      {selectedInterview && (
-        <DetailModal
-          open={!!selectedInterview}
-          onClose={() => setSelectedInterview(null)}
-          title={`Ön Görüşme — ${selectedInterview.date}`}
-          description={getSummary(selectedInterview)}
-        />
-      )}
+      {/* Structured detail modal for interview */}
+      <Dialog open={!!selectedInterview} onOpenChange={() => setSelectedInterview(null)}>
+        <DialogContent className="sm:max-w-lg border-none shadow-xl max-h-[80vh] overflow-y-auto">
+          <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-lg bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))]" />
+          <DialogHeader className="pt-2">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[hsl(var(--primary)/0.1)]">
+                <FileText className="h-5 w-5 text-[hsl(var(--primary))]" />
+              </div>
+              <DialogTitle className="text-lg font-bold text-foreground font-[var(--font-display)]">
+                Ön Görüşme — {selectedInterview?.date}
+              </DialogTitle>
+            </div>
+          </DialogHeader>
+          <div className="mt-2 space-y-3">
+            {selectedInterview && fields.map(f => (
+              <div key={f.key} className="rounded-lg bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.1)] p-4">
+                <h4 className="text-sm font-bold text-[hsl(var(--primary))] mb-1">{f.label}</h4>
+                <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">
+                  {(selectedInterview as any)[f.key] || "-"}
+                </p>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
