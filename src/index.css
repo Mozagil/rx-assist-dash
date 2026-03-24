@@ -6,70 +6,70 @@
 
 @layer base {
   :root {
-    --background: 220 14% 96%;
-    --foreground: 222 47% 11%;
+    --background: 210 20% 96%;
+    --foreground: 220 25% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 220 25% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 220 25% 14%;
 
-    --primary: 220 70% 50%;
+    --primary: 199 70% 44%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 160 45% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 92%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 210 18% 92%;
+    --muted-foreground: 215 12% 50%;
 
-    --accent: 220 14% 95%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 210 22% 94%;
+    --accent-foreground: 220 25% 14%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 68% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 220 70% 50%;
+    --border: 210 16% 90%;
+    --input: 210 16% 90%;
+    --ring: 199 70% 44%;
 
-    --radius: 0.75rem;
+    --radius: 0.625rem;
 
-    /* Coup-inspired palette */
-    --medical-blue: 220 70% 50%;
-    --medical-blue-light: 220 55% 95%;
-    --medical-green: 152 60% 42%;
-    --medical-green-light: 152 45% 94%;
+    /* Medical tokens */
+    --medical-blue: 199 70% 44%;
+    --medical-blue-light: 199 55% 94%;
+    --medical-green: 160 45% 45%;
+    --medical-green-light: 160 40% 93%;
     --medical-amber: 38 92% 50%;
-    --medical-amber-light: 38 70% 95%;
-    --medical-red: 0 84% 60%;
-    --medical-red-light: 0 55% 96%;
-    --medical-purple: 262 60% 55%;
-    --medical-purple-light: 262 45% 95%;
-    --medical-cyan: 190 60% 45%;
-    --medical-cyan-light: 190 45% 94%;
+    --medical-amber-light: 38 70% 93%;
+    --medical-red: 0 68% 52%;
+    --medical-red-light: 0 55% 95%;
+    --medical-purple: 262 52% 50%;
+    --medical-purple-light: 262 40% 94%;
+    --medical-cyan: 185 60% 40%;
+    --medical-cyan-light: 185 45% 93%;
     --medical-teal: 174 55% 42%;
-    --medical-teal-light: 174 40% 94%;
+    --medical-teal-light: 174 40% 93%;
 
-    --sidebar-width: 260px;
+    --sidebar-width: 264px;
     --sidebar-width-collapsed: 72px;
     --navbar-height: 64px;
 
     --shadow-xs: 0 1px 2px 0 hsl(220 20% 30% / 0.04);
-    --shadow-card: 0 1px 3px 0 hsl(220 20% 30% / 0.08), 0 1px 2px -1px hsl(220 20% 30% / 0.04);
-    --shadow-card-hover: 0 10px 30px -5px hsl(220 70% 50% / 0.12), 0 4px 8px -2px hsl(220 20% 30% / 0.06);
-    --shadow-sidebar: 2px 0 12px -2px hsl(222 47% 11% / 0.12);
+    --shadow-card: 0 1px 3px 0 hsl(220 20% 30% / 0.06), 0 1px 2px -1px hsl(220 20% 30% / 0.04);
+    --shadow-card-hover: 0 10px 25px -5px hsl(199 70% 44% / 0.1), 0 4px 8px -2px hsl(220 20% 30% / 0.05);
+    --shadow-sidebar: 1px 0 8px -2px hsl(220 30% 15% / 0.15);
 
-    /* Sidebar - Coup dark navy */
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 220 15% 60%;
-    --sidebar-primary: 220 70% 55%;
+    /* Sidebar */
+    --sidebar-background: 222 32% 18%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-primary: 199 70% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 40% 16%;
-    --sidebar-accent-foreground: 220 20% 85%;
-    --sidebar-border: 222 35% 16%;
-    --sidebar-ring: 220 70% 50%;
+    --sidebar-accent: 222 28% 24%;
+    --sidebar-accent-foreground: 210 25% 88%;
+    --sidebar-border: 222 25% 24%;
+    --sidebar-ring: 199 70% 44%;
 
     --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
@@ -102,68 +102,46 @@
     box-shadow: var(--shadow-card-hover);
   }
 
-  /* ---- KPI stat cards (Coup style) ---- */
+  /* ---- KPI stat cards ---- */
   .stat-card {
-    @apply bg-card rounded-xl border border-border p-5 cursor-pointer relative overflow-hidden transition-all duration-300;
+    @apply bg-card rounded-xl border border-border p-5 cursor-pointer relative overflow-hidden transition-all duration-200;
     box-shadow: var(--shadow-card);
   }
   .stat-card:hover {
     box-shadow: var(--shadow-card-hover);
-    @apply -translate-y-1;
+    @apply -translate-y-0.5;
   }
+  .stat-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-1 h-full;
+  }
+  .stat-card-blue::before { background: hsl(var(--medical-blue)); }
+  .stat-card-green::before { background: hsl(var(--medical-green)); }
+  .stat-card-amber::before { background: hsl(var(--medical-amber)); }
+  .stat-card-red::before { background: hsl(var(--medical-red)); }
+  .stat-card-purple::before { background: hsl(var(--medical-purple)); }
+  .stat-card-cyan::before { background: hsl(var(--medical-cyan)); }
+  .stat-card-teal::before { background: hsl(var(--medical-teal)); }
 
-  /* Featured stat card (first card - dark bg like Coup) */
-  .stat-card-featured {
-    @apply text-white border-0;
-    background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(220, 70%, 35%) 100%);
-    box-shadow: 0 4px 20px -5px hsl(222, 47%, 11% / 0.4);
-  }
-  .stat-card-featured:hover {
-    box-shadow: 0 8px 30px -5px hsl(222, 47%, 11% / 0.5);
-  }
-  .stat-card-featured .stat-title { color: hsl(220, 20%, 80%); }
-  .stat-card-featured .stat-value { color: white; }
-  .stat-card-featured .stat-change { color: hsl(220, 20%, 75%); }
+  .stat-card-blue:hover { border-color: hsl(var(--medical-blue) / 0.3); }
+  .stat-card-green:hover { border-color: hsl(var(--medical-green) / 0.3); }
+  .stat-card-amber:hover { border-color: hsl(var(--medical-amber) / 0.3); }
+  .stat-card-red:hover { border-color: hsl(var(--medical-red) / 0.3); }
+  .stat-card-purple:hover { border-color: hsl(var(--medical-purple) / 0.3); }
+  .stat-card-cyan:hover { border-color: hsl(var(--medical-cyan) / 0.3); }
+  .stat-card-teal:hover { border-color: hsl(var(--medical-teal) / 0.3); }
 
-  .stat-card-blue { border-left: 3px solid hsl(var(--medical-blue)); }
-  .stat-card-green { border-left: 3px solid hsl(var(--medical-green)); }
-  .stat-card-amber { border-left: 3px solid hsl(var(--medical-amber)); }
-  .stat-card-red { border-left: 3px solid hsl(var(--medical-red)); }
-  .stat-card-purple { border-left: 3px solid hsl(var(--medical-purple)); }
-  .stat-card-cyan { border-left: 3px solid hsl(var(--medical-cyan)); }
-  .stat-card-teal { border-left: 3px solid hsl(var(--medical-teal)); }
-
-  .stat-card-blue:hover { border-color: hsl(var(--medical-blue)); background: hsl(var(--medical-blue-light)); }
-  .stat-card-green:hover { border-color: hsl(var(--medical-green)); background: hsl(var(--medical-green-light)); }
-  .stat-card-amber:hover { border-color: hsl(var(--medical-amber)); background: hsl(var(--medical-amber-light)); }
-  .stat-card-red:hover { border-color: hsl(var(--medical-red)); background: hsl(var(--medical-red-light)); }
-  .stat-card-purple:hover { border-color: hsl(var(--medical-purple)); background: hsl(var(--medical-purple-light)); }
-  .stat-card-cyan:hover { border-color: hsl(var(--medical-cyan)); background: hsl(var(--medical-cyan-light)); }
-  .stat-card-teal:hover { border-color: hsl(var(--medical-teal)); background: hsl(var(--medical-teal-light)); }
-
-  /* Change badges */
-  .change-badge {
-    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold;
-  }
-  .change-badge-up {
-    background: hsl(var(--medical-green-light));
-    color: hsl(var(--medical-green));
-  }
-  .change-badge-down {
-    background: hsl(var(--medical-red-light));
-    color: hsl(var(--medical-red));
-  }
-
-  /* ---- Tables (Coup style) ---- */
+  /* ---- Tables ---- */
   .medical-table {
     @apply w-full text-sm;
   }
   .medical-table thead {
-    background: hsl(var(--accent));
+    background: hsl(var(--primary) / 0.15);
   }
   .medical-table th {
-    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground;
-    border-bottom: 1px solid hsl(var(--border));
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider;
+    color: hsl(var(--primary));
+    border-bottom: 2px solid hsl(var(--primary) / 0.25);
   }
   .medical-table td {
     @apply px-4 py-3.5 border-b border-border text-sm;
@@ -172,8 +150,12 @@
   .medical-table tbody tr {
     @apply transition-all duration-150;
   }
+  .medical-table tbody tr:nth-child(even) {
+    background: hsl(var(--primary) / 0.02);
+  }
   .medical-table tbody tr:hover {
-    background: hsl(var(--primary) / 0.04);
+    background: hsl(var(--primary) / 0.07);
+    box-shadow: inset 3px 0 0 0 hsl(var(--primary));
   }
 
   /* Row status colors */
@@ -231,7 +213,7 @@
     @apply btn-medical bg-primary text-primary-foreground shadow-sm;
   }
   .btn-medical-primary:hover {
-    @apply opacity-90 shadow-md -translate-y-0.5;
+    @apply opacity-90 shadow-md;
   }
   .btn-medical-secondary {
     @apply btn-medical bg-secondary text-secondary-foreground shadow-sm;
@@ -259,7 +241,7 @@
   }
 
   .icon-btn {
-    @apply inline-flex items-center justify-center rounded-lg p-2.5 text-muted-foreground transition-all duration-150;
+    @apply inline-flex items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors duration-150;
   }
   .icon-btn:hover {
     @apply bg-accent text-foreground;
@@ -272,7 +254,7 @@
     @apply medical-card;
   }
 
-  /* ---- Sidebar (Coup dark navy) ---- */
+  /* ---- Sidebar ---- */
   .sidebar-link {
     @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150;
     color: hsl(var(--sidebar-foreground));
@@ -292,12 +274,12 @@
     background: hsl(var(--sidebar-primary));
   }
 
-  /* ---- Search (Coup style) ---- */
+  /* ---- Search ---- */
   .search-input {
-    @apply w-full rounded-lg border border-border bg-accent px-4 py-2 text-sm transition-all duration-200 outline-none;
+    @apply w-full rounded-lg border border-border bg-background px-4 py-2 text-sm transition-all duration-200 outline-none;
   }
   .search-input:focus {
-    @apply ring-2 ring-ring/20 border-primary bg-card;
+    @apply ring-2 ring-ring/20 border-primary;
   }
   .search-input::placeholder {
     @apply text-muted-foreground;
@@ -307,17 +289,5 @@
   .dashboard-section-title {
     @apply text-base font-semibold text-foreground flex items-center gap-2;
     font-family: var(--font-display);
-  }
-
-  /* ---- Coup-style section cards ---- */
-  .section-card {
-    @apply bg-card rounded-xl border border-border transition-all duration-200;
-    box-shadow: var(--shadow-card);
-  }
-  .section-card-header {
-    @apply flex items-center justify-between p-5 pb-0;
-  }
-  .section-card-body {
-    @apply p-5;
   }
 }
