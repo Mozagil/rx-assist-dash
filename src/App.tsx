@@ -9,17 +9,14 @@ import DanisanListesi from "./pages/DanisanListesi";
 import DanisanProfili from "./pages/DanisanProfili";
 import OnGorusme from "./pages/OnGorusme";
 import VerilenDestek from "./pages/VerilenDestek";
-import DestegiBiten from "./pages/DestegiBiten";
 import KontrolAramalari from "./pages/KontrolAramalari";
 import DegerlendirmeAramalari from "./pages/DegerlendirmeAramalari";
-import Protokollerim from "./pages/Protokollerim";
-import Hedeflerim from "./pages/Hedeflerim";
-import BilgilendirmeMesajlari from "./pages/BilgilendirmeMesajlari";
-import YeniDanisan from "./pages/YeniDanisan";
-import Urunler from "./pages/Urunler";
-import Formuller from "./pages/Formuller";
+import CiltBakimRandevulari from "./pages/CiltBakimRandevulari";
+import DermokozmetikBiten from "./pages/DermokozmetikBiten";
+import DigerDestekBiten from "./pages/DigerDestekBiten";
 import CariHareketler from "./pages/CariHareketler";
 import Kullanicilar from "./pages/Kullanicilar";
+import YeniDanisan from "./pages/YeniDanisan";
 import DanisanProtokoller from "./pages/DanisanProtokoller";
 import DanisanBilgilendirme from "./pages/DanisanBilgilendirme";
 import KayitOzeti from "./pages/KayitOzeti";
@@ -42,20 +39,19 @@ const App = () => (
             <Route path="/danisan/:id" element={<DanisanProfili />} />
             <Route path="/danisan/:id/on-gorusme" element={<OnGorusme />} />
             <Route path="/danisan/:id/verilen-destek" element={<VerilenDestek />} />
+            <Route path="/danisan/:id/dermokozmetik-urunleri" element={<VerilenDestek />} />
+            <Route path="/danisan/:id/diger-destek-urunleri" element={<VerilenDestek />} />
             <Route path="/danisan/:id/protokol" element={<DanisanProtokoller />} />
             <Route path="/danisan/:id/bilgilendirme" element={<DanisanBilgilendirme />} />
             <Route path="/danisan/:id/kayit-ozeti" element={<KayitOzeti />} />
-            <Route path="/destegi-biten" element={<DestegiBiten />} />
             <Route path="/kontrol-aramalari" element={<KontrolAramalari />} />
             <Route path="/degerlendirme-aramalari" element={<DegerlendirmeAramalari />} />
-            <Route path="/protokollerim" element={<Protokollerim />} />
-            <Route path="/hedeflerim" element={<Hedeflerim />} />
-            <Route path="/bilgilendirme-mesajlari" element={<BilgilendirmeMesajlari />} />
-            <Route path="/yeni-danisan" element={<YeniDanisan />} />
-            <Route path="/urunler" element={<Urunler />} />
-            <Route path="/formuller" element={<Formuller />} />
+            <Route path="/cilt-bakim-randevulari" element={<CiltBakimRandevulari />} />
+            <Route path="/dermokozmetik-biten" element={<DermokozmetikBiten />} />
+            <Route path="/diger-destek-biten" element={<DigerDestekBiten />} />
             <Route path="/cari-hareketler" element={<CariHareketler />} />
             <Route path="/kullanicilar" element={<Kullanicilar />} />
+            <Route path="/yeni-danisan" element={<YeniDanisan />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

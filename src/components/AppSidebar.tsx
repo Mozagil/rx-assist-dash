@@ -6,16 +6,14 @@ import {
   Users,
   PhoneCall,
   ClipboardCheck,
-  FileText,
-  Target,
-  Mail,
-  Pill,
-  FlaskConical,
   Receipt,
   UserCog,
   ChevronLeft,
   Stethoscope,
   Menu,
+  Sparkles,
+  PackageX,
+  CalendarHeart,
 } from "lucide-react";
 
 const menuItems = [
@@ -24,11 +22,9 @@ const menuItems = [
   { title: "Danışan Listesi", path: "/danisan-listesi", icon: Users },
   { title: "Kontrol Aramaları", path: "/kontrol-aramalari", icon: PhoneCall },
   { title: "Değerlendirme Aramaları", path: "/degerlendirme-aramalari", icon: ClipboardCheck },
-  { title: "Protokollerim", path: "/protokollerim", icon: FileText },
-  { title: "Hedeflerim", path: "/hedeflerim", icon: Target },
-  { title: "Bilgilendirme Mesajlarım", path: "/bilgilendirme-mesajlari", icon: Mail },
-  { title: "Ürünler", path: "/urunler", icon: Pill },
-  { title: "Formüller", path: "/formuller", icon: FlaskConical },
+  { title: "Cilt Bakım Randevuları", path: "/cilt-bakim-randevulari", icon: CalendarHeart },
+  { title: "Dermokozmetik Biten", path: "/dermokozmetik-biten", icon: Sparkles },
+  { title: "Diğer Destek Ürünü Biten", path: "/diger-destek-biten", icon: PackageX },
   { title: "Cari Hareketlerim", path: "/cari-hareketler", icon: Receipt },
   { title: "Kullanıcılar", path: "/kullanicilar", icon: UserCog },
 ];
@@ -40,7 +36,6 @@ export default function AppSidebar() {
 
   return (
     <>
-      {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(true)}
         className="fixed left-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-card shadow-md md:hidden"
@@ -48,7 +43,6 @@ export default function AppSidebar() {
         <Menu className="h-5 w-5 text-foreground" />
       </button>
 
-      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           className="fixed inset-0 z-40 bg-foreground/30 backdrop-blur-sm md:hidden"
@@ -66,7 +60,6 @@ export default function AppSidebar() {
           boxShadow: "var(--shadow-sidebar)",
         }}
       >
-        {/* Logo area */}
         <div
           className="flex h-16 items-center gap-3 px-4"
           style={{ borderBottom: "1px solid hsl(var(--sidebar-border))" }}
@@ -80,21 +73,20 @@ export default function AppSidebar() {
           {!collapsed && (
             <div className="min-w-0">
               <h1 className="font-display text-sm font-bold text-primary-foreground truncate">
-                EczaPanel
+                DermPanel
               </h1>
               <p className="text-[10px] truncate" style={{ color: "hsl(var(--sidebar-foreground))" }}>
-                Eczane Yönetim Sistemi
+                Dermokozmetik Yönetim
               </p>
             </div>
           )}
         </div>
 
-        {/* User info */}
         {!collapsed && (
           <div className="px-4 py-3" style={{ borderBottom: "1px solid hsl(var(--sidebar-border))" }}>
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                EP
+                DP
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-primary-foreground truncate">Eczacı</p>
@@ -106,7 +98,6 @@ export default function AppSidebar() {
           </div>
         )}
 
-        {/* Navigation */}
         <nav className="flex-1 overflow-y-auto px-3 py-3">
           <div className="space-y-0.5">
             {menuItems.map((item) => {
@@ -127,7 +118,6 @@ export default function AppSidebar() {
           </div>
         </nav>
 
-        {/* Collapse toggle (desktop only) */}
         <div className="hidden md:block p-3" style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}>
           <button
             onClick={() => setCollapsed(!collapsed)}
