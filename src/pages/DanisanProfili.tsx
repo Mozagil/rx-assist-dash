@@ -1,24 +1,20 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 import {
-  MessageSquare, ClipboardList, FileText, Camera,
-  Pill, Target, MessageCircle, HeartPulse,
-  DollarSign, Users, Stethoscope, Package
+  MessageSquare, Sparkles, Package, FileSearch, FileHeart,
+  FlaskConical, CalendarHeart, Megaphone, ClipboardList,
 } from "lucide-react";
 
 const buttons = [
   { label: "Ön Görüşme", icon: MessageSquare, path: "on-gorusme", color: "var(--primary)" },
-  { label: "Anamnez", icon: ClipboardList, path: "anamnez", color: "var(--medical-blue)" },
-  { label: "Tahlil", icon: FileText, path: "tahlil", color: "var(--medical-green)" },
-  { label: "Fotoğraflar", icon: Camera, path: "fotograflar", color: "var(--medical-purple)" },
-  { label: "Verilen Destek", icon: Package, path: "verilen-destek", color: "var(--secondary)" },
-  { label: "Hedefler", icon: Target, path: "hedefler", color: "var(--medical-amber)" },
-  { label: "Hasta Geri Bildirimi", icon: MessageCircle, path: "geri-bildirim", color: "var(--medical-cyan)" },
-  { label: "Yaşam Tarzı", icon: HeartPulse, path: "yasam-tarzi", color: "var(--medical-green)" },
-  { label: "Bilgilendirme Mesajı", icon: MessageSquare, path: "bilgilendirme", color: "var(--primary)" },
-  { label: "Protokol", icon: Stethoscope, path: "protokol", color: "var(--medical-blue)" },
-  { label: "Ciro", icon: DollarSign, path: "ciro", color: "var(--medical-amber)" },
-  { label: "Kayıt Özeti", icon: Users, path: "kayit-ozeti", color: "var(--medical-purple)" },
+  { label: "Dermokozmetik Ürünleri", icon: Sparkles, path: "dermokozmetik-urunleri", color: "var(--medical-purple)" },
+  { label: "Diğer Destek Ürünleri", icon: Package, path: "diger-destek-urunleri", color: "var(--secondary)" },
+  { label: "Saç Analiz Raporu", icon: FileSearch, path: "sac-analiz", color: "var(--medical-amber)" },
+  { label: "Cilt Analiz Raporu", icon: FileHeart, path: "cilt-analiz", color: "var(--medical-cyan)" },
+  { label: "Verilen Testler", icon: FlaskConical, path: "verilen-testler", color: "var(--medical-green)" },
+  { label: "Cilt Bakım Talebi", icon: CalendarHeart, path: "cilt-bakim-talebi", color: "var(--medical-blue)" },
+  { label: "Kampanya Mesajı İlet", icon: Megaphone, path: "kampanya-mesaji", color: "var(--medical-red)" },
+  { label: "Danışan Özeti", icon: ClipboardList, path: "kayit-ozeti", color: "var(--medical-teal)" },
 ];
 
 export default function DanisanProfili() {
@@ -41,9 +37,12 @@ export default function DanisanProfili() {
           <h1 className="text-2xl font-bold text-foreground font-[var(--font-display)]">Danışan Profili</h1>
         </div>
 
-        <div className="inline-block px-6 py-2 rounded-lg bg-[hsl(var(--primary))] text-primary-foreground font-semibold text-sm mb-3">
+        <button
+          onClick={() => navigate(`/danisan/${id}`, { state: { name, contact } })}
+          className="inline-block px-6 py-2 rounded-lg bg-[hsl(var(--primary))] text-primary-foreground font-semibold text-sm mb-3 hover:opacity-90 transition-opacity cursor-pointer"
+        >
           {name}
-        </div>
+        </button>
 
         <div className="space-y-1 text-sm text-muted-foreground">
           <p><span className="font-semibold text-foreground">Ad Soyad:</span> {name}</p>
@@ -51,7 +50,7 @@ export default function DanisanProfili() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl mx-auto">
         {buttons.map((btn) => (
           <button
             key={btn.path}

@@ -2,34 +2,126 @@ import { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import BackButton from "@/components/BackButton";
 import PageHeader from "@/components/PageHeader";
-import { Plus, SkipForward, Save, Eye } from "lucide-react";
+import { Plus, Save, Eye } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { FileText } from "lucide-react";
 
+/* ---------- Types ---------- */
 interface Interview {
   id: string;
   date: string;
-  hedef: string;
-  sikayetler: string;
-  ilaclar: string;
-  vitaminler: string;
-  dermokozmetik: string;
-  majistral: string;
-  aromaterapi: string;
-  onerilen: string;
+  ciltTipi: string;
+  ciltDurumu: string[];
+  ciltHassasiyet: string[];
+  sacDerisiTipi: string;
+  sacDerisiRahatsizlik: string[];
 }
 
-const fields = [
-  { key: "hedef", label: "Hasta Anamnezi (Hedef)", required: true },
-  { key: "sikayetler", label: "Şikayetler", required: true },
-  { key: "ilaclar", label: "Kullandığı İlaçlar", required: true },
-  { key: "vitaminler", label: "Kullandığı Vitaminler", required: true },
-  { key: "dermokozmetik", label: "Kullandığı Dermokozmetikler", required: true },
-  { key: "majistral", label: "Kullandığı Majistral Ürünleri", required: true },
-  { key: "aromaterapi", label: "Kullandığı Aromaterapi Ürünleri", required: true },
-  { key: "onerilen", label: "Önerilen Destek Ürünler", required: true },
+/* ---------- Category data ---------- */
+const ciltTipiOptions = [
+  { value: "Normal", desc: "Dengeli, gözenekleri kapalı, ne yağlı ne kuru." },
+  { value: "Yağlı", desc: "Parlama yapan, gözenekleri açık, siyah nokta oluşumuna meyilli." },
+  { value: "Kuru", desc: "Mat, gergin, yağ salgısı yetersiz, ince çizgilenmeye meyilli." },
+  { value: "Karma", desc: "Alın, burun ve çene (T bölgesi) yağlı; yanaklar normal veya kuru." },
 ];
 
+const ciltDurumuOptions = [
+  { value: "Nemsizlik (Dehidrasyon)", desc: "Cildin tipinden bağımsız olarak \"su\" kaybetmesi. (Yağlı ciltler de nemsiz kalabilir)." },
+  { value: "Leke", desc: "Güneş, sivilce sonrası izler veya hormonal (melazma) lekeler." },
+  { value: "Yaşlanma Belirtileri", desc: "Elastikiyet kaybı, sarkma veya yerleşik kırışıklıklar." },
+  { value: "Matlık ve Işıltı Kaybı", desc: "Yorgun, grileşmiş, enerjisiz görünüm." },
+  { value: "Genişlemiş Gözenek", desc: "Cilt yüzeyindeki doku bozukluğu." },
+];
+
+const ciltHassasiyetOptions = [
+  { value: "Hassasiyet / Reaktivite", desc: "Yanma, batma, kaşıntı ve dış etkenlere aşırı tepki." },
+  { value: "Akne", desc: "Aktif sivilceler." },
+  { value: "Komedon", desc: "Deri altı pütürleri." },
+  { value: "Roza (Gül Hastalığı)", desc: "Burun ve yanaklarda kalıcı kızarıklık, kılcal damar belirginliği." },
+  { value: "Dermatit / Egzama", desc: "Bölgesel aşırı kuruluk, kaşıntılı plaklar veya pullanma." },
+  { value: "Seboroik Dermatit", desc: "Özellikle burun kenarları ve saç çizgisinde yağlı pullanma." },
+];
+
+const sacDerisiTipiOptions = [
+  { value: "Yağlı Saç Derisi", desc: "Saçlarım yıkandıktan bir gün (veya daha kısa süre) sonra ağırlaşıyor ve parlıyor. Hacimsiz görünüyor." },
+  { value: "Kuru Saç Derisi", desc: "Saç derimde gerginlik ve kaşıntı var. Nadiren de olsa küçük, toz gibi beyaz döküntüler (kuru kepek) görüyorum." },
+  { value: "Normal Saç Derisi", desc: "Yağlanma ve kuruluk dengeli. Saçlarımı 2-3 günde bir yıkamam yeterli oluyor." },
+  { value: "Karma Saç Derisi", desc: "Saç diplerim çabuk yağlanıyor ama saç uçlarım aşırı kuru ve sert." },
+];
+
+const sacDerisiRahatsizlikOptions = [
+  { value: "Yağlı Kepek (Sebore)", desc: "Saç derisine yapışan, sarımsı ve iri pullanmalar." },
+  { value: "Hassasiyet ve Kaşıntı", desc: "Saç derisinde kızarıklık, dokunulduğunda acı veya sürekli kaşınma hissi." },
+  { value: "Saç Dökülmesi", desc: "Günlük normal sınırın üzerinde dökülme (Bölgesel veya genel seyrelme)." },
+  { value: "Seboroik Dermatit / Sedef", desc: "Tanısı konulmuş, tekrarlayan plaklar veya aşırı pullanma sorunu." },
+];
+
+/* ---------- Reusable Components ---------- */
+function RadioGroup({ title, subtitle, options, value, onChange }: {
+  title: string; subtitle?: string; options: { value: string; desc: string }[];
+  value: string; onChange: (v: string) => void;
+}) {
+  return (
+    <div className="medical-card p-5 space-y-3">
+      <h3 className="text-sm font-bold text-foreground">{title}</h3>
+      {subtitle && <p className="text-xs text-muted-foreground italic">{subtitle}</p>}
+      <div className="space-y-2">
+        {options.map(opt => (
+          <label key={opt.value} className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+            value === opt.value ? "border-[hsl(var(--primary))] bg-[hsl(var(--primary)/0.06)]" : "border-border hover:bg-accent/50"
+          }`}>
+            <input
+              type="radio"
+              name={title}
+              checked={value === opt.value}
+              onChange={() => onChange(opt.value)}
+              className="mt-0.5 accent-[hsl(var(--primary))]"
+            />
+            <div>
+              <span className="text-sm font-semibold text-foreground">{opt.value}</span>
+              <span className="text-xs text-muted-foreground block mt-0.5">{opt.desc}</span>
+            </div>
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CheckboxGroup({ title, subtitle, options, values, onChange }: {
+  title: string; subtitle?: string; options: { value: string; desc: string }[];
+  values: string[]; onChange: (v: string[]) => void;
+}) {
+  const toggle = (v: string) => {
+    onChange(values.includes(v) ? values.filter(x => x !== v) : [...values, v]);
+  };
+  return (
+    <div className="medical-card p-5 space-y-3">
+      <h3 className="text-sm font-bold text-foreground">{title}</h3>
+      {subtitle && <p className="text-xs text-muted-foreground italic">{subtitle}</p>}
+      <div className="space-y-2">
+        {options.map(opt => (
+          <label key={opt.value} className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+            values.includes(opt.value) ? "border-[hsl(var(--primary))] bg-[hsl(var(--primary)/0.06)]" : "border-border hover:bg-accent/50"
+          }`}>
+            <input
+              type="checkbox"
+              checked={values.includes(opt.value)}
+              onChange={() => toggle(opt.value)}
+              className="mt-0.5 accent-[hsl(var(--primary))]"
+            />
+            <div>
+              <span className="text-sm font-semibold text-foreground">{opt.value}</span>
+              <span className="text-xs text-muted-foreground block mt-0.5">{opt.desc}</span>
+            </div>
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Main Component ---------- */
 export default function OnGorusme() {
   const { id } = useParams();
   const location = useLocation();
@@ -37,42 +129,51 @@ export default function OnGorusme() {
   const name = state?.name || "Danışan";
 
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState<Record<string, string>>({});
   const [interviews, setInterviews] = useState<Interview[]>([]);
-  const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [selectedInterview, setSelectedInterview] = useState<Interview | null>(null);
 
+  // Form state
+  const [ciltTipi, setCiltTipi] = useState("");
+  const [ciltDurumu, setCiltDurumu] = useState<string[]>([]);
+  const [ciltHassasiyet, setCiltHassasiyet] = useState<string[]>([]);
+  const [sacDerisiTipi, setSacDerisiTipi] = useState("");
+  const [sacDerisiRahatsizlik, setSacDerisiRahatsizlik] = useState<string[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  const resetForm = () => {
+    setCiltTipi(""); setCiltDurumu([]); setCiltHassasiyet([]);
+    setSacDerisiTipi(""); setSacDerisiRahatsizlik([]); setErrors([]);
+  };
+
   const handleSave = () => {
-    const newErrors: Record<string, boolean> = {};
-    let hasError = false;
-    fields.forEach(f => {
-      if (!form[f.key]?.trim()) {
-        newErrors[f.key] = true;
-        hasError = true;
-      }
-    });
-    setErrors(newErrors);
-    if (hasError) return;
+    const errs: string[] = [];
+    if (!ciltTipi) errs.push("Temel Cilt Tipi seçiniz");
+    if (ciltDurumu.length === 0) errs.push("Cilt Durumu seçiniz");
+    if (!sacDerisiTipi) errs.push("Saç Derisi Tipi seçiniz");
+    if (errs.length > 0) { setErrors(errs); return; }
 
     const interview: Interview = {
       id: Date.now().toString(),
       date: new Date().toLocaleDateString("tr-TR"),
-      ...form as any,
+      ciltTipi, ciltDurumu, ciltHassasiyet, sacDerisiTipi, sacDerisiRahatsizlik,
     };
     setInterviews(prev => [interview, ...prev]);
-    setForm({});
+    resetForm();
     setShowForm(false);
   };
 
-  const handleSkip = (key: string) => {
-    setForm(prev => ({ ...prev, [key]: "-" }));
-    setErrors(prev => ({ ...prev, [key]: false }));
-  };
+  const categories = [
+    { title: "Temel Cilt Tipi", items: (i: Interview) => [i.ciltTipi] },
+    { title: "Cilt Durumu ve Endişeleri", items: (i: Interview) => i.ciltDurumu },
+    { title: "Cilt Hassasiyeti ve Rahatsızlıklar", items: (i: Interview) => i.ciltHassasiyet },
+    { title: "Saç Derisi Tipi", items: (i: Interview) => [i.sacDerisiTipi] },
+    { title: "Saç Derisi Rahatsızlıkları", items: (i: Interview) => i.sacDerisiRahatsizlik },
+  ];
 
   return (
     <div>
       <BackButton />
-      <PageHeader title={`Ön Görüşme — ${name}`} subtitle="Danışan ön görüşme kayıtları" />
+      <PageHeader title={`Ön Görüşme — ${name}`} subtitle="Cilt ve saç derisi analiz formu" />
 
       {!showForm && (
         <div className="mb-6 flex justify-end">
@@ -83,57 +184,22 @@ export default function OnGorusme() {
       )}
 
       {showForm && (
-        <div className="medical-card p-6 mb-6 space-y-4">
-          {fields.map(f => (
-            <div key={f.key}>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="text-sm font-semibold text-foreground flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[hsl(var(--primary))]" />
-                  {f.label}
-                </label>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => {
-                      setForm(prev => ({ ...prev, [f.key]: (prev[f.key] || "") }));
-                      setErrors(prev => ({ ...prev, [f.key]: false }));
-                    }}
-                    className="text-xs text-[hsl(var(--primary))] hover:text-[hsl(var(--primary)/0.8)] flex items-center gap-1 transition-colors font-medium"
-                  >
-                    <Plus className="h-3 w-3" /> Ekle
-                  </button>
-                  <button
-                    onClick={() => handleSkip(f.key)}
-                    className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
-                  >
-                    <SkipForward className="h-3 w-3" /> Geç
-                  </button>
-                </div>
-              </div>
-              <textarea
-                value={form[f.key] || ""}
-                onChange={e => {
-                  setForm(prev => ({ ...prev, [f.key]: e.target.value }));
-                  setErrors(prev => ({ ...prev, [f.key]: false }));
-                }}
-                className={`w-full rounded-lg border px-3 py-2 text-sm bg-background transition-colors focus:ring-2 focus:ring-[hsl(var(--primary)/0.3)] focus:border-[hsl(var(--primary))] outline-none ${
-                  errors[f.key] ? "border-destructive" : "border-border"
-                }`}
-                rows={2}
-                placeholder={`${f.label} giriniz...`}
-              />
-              {errors[f.key] && (
-                <p className="text-xs text-destructive mt-1">Bu alan zorunludur</p>
-              )}
+        <div className="space-y-4 mb-6">
+          {errors.length > 0 && (
+            <div className="rounded-lg border border-destructive/30 bg-[hsl(var(--medical-red-light))] p-4">
+              {errors.map((e, i) => <p key={i} className="text-sm text-destructive font-medium">• {e}</p>)}
             </div>
-          ))}
+          )}
+
+          <RadioGroup title="1. Temel Cilt Tipi" subtitle="Sadece bir seçenek işaretlenebilir" options={ciltTipiOptions} value={ciltTipi} onChange={setCiltTipi} />
+          <CheckboxGroup title="2. Cilt Durumu ve Endişeleri" subtitle="Birden fazla seçenek işaretlenebilir" options={ciltDurumuOptions} values={ciltDurumu} onChange={setCiltDurumu} />
+          <CheckboxGroup title="3. Cilt Hassasiyeti ve Rahatsızlıklar" subtitle="Birden fazla seçenek işaretlenebilir" options={ciltHassasiyetOptions} values={ciltHassasiyet} onChange={setCiltHassasiyet} />
+          <RadioGroup title="4. Saç Derisi Tipi" subtitle="Şampuan seçimi esas olarak buraya göre yapılır." options={sacDerisiTipiOptions} value={sacDerisiTipi} onChange={setSacDerisiTipi} />
+          <CheckboxGroup title="5. Saç Derisi Rahatsızlıkları ve Durumları" subtitle="Tedavi edici veya majistral ürünler için kritik bölüm." options={sacDerisiRahatsizlikOptions} values={sacDerisiRahatsizlik} onChange={setSacDerisiRahatsizlik} />
 
           <div className="flex justify-end gap-2 pt-2">
-            <button onClick={() => { setShowForm(false); setForm({}); setErrors({}); }} className="btn-medical-ghost">
-              İptal
-            </button>
-            <button onClick={handleSave} className="btn-medical-primary">
-              <Save className="h-4 w-4" /> Kaydet
-            </button>
+            <button onClick={() => { setShowForm(false); resetForm(); }} className="btn-medical-ghost">İptal</button>
+            <button onClick={handleSave} className="btn-medical-primary"><Save className="h-4 w-4" /> Kaydet</button>
           </div>
         </div>
       )}
@@ -155,13 +221,13 @@ export default function OnGorusme() {
               <span className="text-xs font-medium text-muted-foreground">{i.date}</span>
               <Eye className="h-4 w-4 text-muted-foreground group-hover:text-[hsl(var(--primary))] transition-colors" />
             </div>
-            <h3 className="font-semibold text-foreground text-sm mb-1">Hedef: {i.hedef}</h3>
-            <p className="text-xs text-muted-foreground line-clamp-2">Şikayetler: {i.sikayetler}</p>
+            <h3 className="font-semibold text-foreground text-sm mb-1">Cilt Tipi: {i.ciltTipi}</h3>
+            <p className="text-xs text-muted-foreground line-clamp-2">Saç Derisi: {i.sacDerisiTipi}</p>
           </button>
         ))}
       </div>
 
-      {/* Structured detail modal for interview */}
+      {/* Detail Modal */}
       <Dialog open={!!selectedInterview} onOpenChange={() => setSelectedInterview(null)}>
         <DialogContent className="sm:max-w-lg border-none shadow-xl max-h-[80vh] overflow-y-auto">
           <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-lg bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))]" />
@@ -176,14 +242,23 @@ export default function OnGorusme() {
             </div>
           </DialogHeader>
           <div className="mt-2 space-y-3">
-            {selectedInterview && fields.map(f => (
-              <div key={f.key} className="rounded-lg bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.1)] p-4">
-                <h4 className="text-sm font-bold text-[hsl(var(--primary))] mb-1">{f.label}</h4>
-                <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">
-                  {(selectedInterview as any)[f.key] || "-"}
-                </p>
-              </div>
-            ))}
+            {selectedInterview && categories.map(cat => {
+              const items = cat.items(selectedInterview);
+              if (!items || items.length === 0 || (items.length === 1 && !items[0])) return null;
+              return (
+                <div key={cat.title} className="rounded-lg bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.1)] p-4">
+                  <h4 className="text-sm font-bold text-[hsl(var(--primary))] mb-2">{cat.title}</h4>
+                  <ul className="space-y-1">
+                    {items.map((item, idx) => (
+                      <li key={idx} className="text-sm text-foreground/80 flex items-start gap-2">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))] shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </DialogContent>
       </Dialog>
